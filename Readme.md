@@ -29,22 +29,22 @@
 
 ## Использованные материалы
 
-- *main_theme_01.wav* (музыкальная тема для intro и outro)
+- *main_theme_01.wav* (музыкальная тема для intro и outro)<br>
 credit me as @wyver9 (also you can add link to my Twitter or Bandcamp)
 https://opengameart.org/content/good-mood-theme-8-bit
 
-- *The Undefeated - Chiptune Comp 06 - Long Track.ogg* (музыкальная тема для уровней)
+- *The Undefeated - Chiptune Comp 06 - Long Track.ogg* (музыкальная тема для уровней)<br>
 Music by Oblidivm https://oblidivmmusic.blogspot.com
 https://opengameart.org/content/chiptune-music-for-arcade-games
 
-- *Puzzle Pack* (шарик, платформа и кирпичи)
+- *Puzzle Pack* (шарик, платформа и кирпичи)<br>
 Puzzle game graphics by Kenney Vleugels (www.kenney.nl)
 https://www.kenney.nl/assets/puzzle-pack
 
-- *Клипарт HiClipart*
+- *Клипарт HiClipart*<br>
 HiClipart is an open community for users to share PNG images,
 all PNG cliparts in HiClipart are for Non-Commercial Use, no attribution required.
 https://www.hiclipart.com/free-transparent-background-png-clipart-dojmh
 
-- *Изображение краба*
+- *Изображение краба*<br>
 http://jurac.spb.ru/image/7681-0.html
