@@ -9,7 +9,7 @@ NextStage = namedtuple('NextStage', ('name', 'params'))
 class Stage:
     '''
     Базовый класс этапа игры
-    
+
     Класс содержит только общий набор методов и реализацию метода для получения событий мыши и клавиатуры.
     '''
     def __init__(self):
@@ -27,7 +27,7 @@ class Stage:
 
 
     # Возвращает None или объект типа NextStage.
-    def update(self):
+    def update(self, time):
         pass
 
 

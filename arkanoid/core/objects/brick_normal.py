@@ -1,7 +1,7 @@
 import pygame
 from random import randrange
 from arkanoid.config import DIR_RESOURCES_IMAGES
-from arkanoid.brick import Brick
+from .brick import Brick
 
 
 class NormalBrick(Brick):

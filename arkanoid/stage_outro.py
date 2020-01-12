@@ -2,7 +2,7 @@ import pygame
 from enum import Enum
 from arkanoid.config import (
     DIR_RESOURCES_IMAGES, DIR_RESOURCES_SOUND)
-from arkanoid.stage import Stage, NextStage
+from arkanoid.core.stage import Stage, NextStage
 
 
 _OutroStageState = Enum('State', 'Current Game Quit')
@@ -52,7 +52,7 @@ class OutroStage(Stage):
         pygame.mixer.music.fadeout(500)
 
 
-    def update(self):
+    def update(self, time):
         if self._state == _OutroStageState.Game:
             return NextStage('game', None)
         elif self._state == _OutroStageState.Quit:

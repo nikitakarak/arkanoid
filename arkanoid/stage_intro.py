@@ -1,7 +1,7 @@
 import pygame
 from arkanoid.config import (
     DIR_RESOURCES_IMAGES, DIR_RESOURCES_SOUND)
-from arkanoid.stage import Stage, NextStage
+from arkanoid.core.stage import Stage, NextStage
 
 
 class IntroStage(Stage):
@@ -31,7 +31,7 @@ class IntroStage(Stage):
         pygame.mixer.music.fadeout(500)
 
 
-    def update(self):
+    def update(self, time):
         if not self._running:
             return NextStage('game', None)
 

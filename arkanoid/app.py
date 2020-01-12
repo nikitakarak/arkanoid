@@ -1,12 +1,10 @@
-from arkanoid.game import Game
-from arkanoid.stage_intro import IntroStage
-from arkanoid.stage_game import GameStage
-from arkanoid.stage_outro import OutroStage
+from arkanoid.core.game import Game
+from arkanoid import IntroStage, GameStage, OutroStage
 
 
 class Arkanoid(Game):
     def __init__(self):
-        super().__init__(100, 'Арканоид', (1130, 700))
+        super().__init__('Арканоид', (1130, 700))
 
         self._stages = {
             'intro': IntroStage(),

@@ -1,4 +1,4 @@
-from arkanoid.app import Arkanoid
+from arkanoid import Arkanoid
 
 
 def main():

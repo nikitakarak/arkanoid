@@ -1,5 +1,5 @@
 import pygame
-from arkanoid.brick import Brick
+from .brick import Brick
 
 
 class IndestructibleBrick(Brick):

@@ -1,14 +1,12 @@
 import pygame
 import random
 from arkanoid.config import (
-    DIR_RESOURCES_IMAGES, DIR_RESOURCES_SOUND)
-from arkanoid.stage import Stage, NextStage
-from arkanoid.brick_normal import NormalBrick
-from arkanoid.brick_indestructable import IndestructibleBrick
-from arkanoid.ball import Ball
-from arkanoid.paddle import Paddle
-from arkanoid.level import Level
-from arkanoid.text import Text
+    DIR_RESOURCES_IMAGES, DIR_RESOURCES_SOUND
+)
+from arkanoid.core.stage import Stage, NextStage
+from arkanoid.core.objects import (
+    NormalBrick, IndestructibleBrick, Ball, Paddle, Level, Text
+)
 
 
 class GameStage(Stage):
@@ -17,7 +15,7 @@ class GameStage(Stage):
 
         self.background = pygame.image.load(
             DIR_RESOURCES_IMAGES + r'back_game_01.jpg').convert()
-        self.screen_rect = pygame.Rect(156, 26, 819, 648)
+        self.area = pygame.Rect(156, 26, 819, 648)
 
         self.game_over = False
         self.score = 0
@@ -27,7 +25,7 @@ class GameStage(Stage):
 
 
     def _create_paddle(self):
-        self.paddle = Paddle(self.screen_rect)
+        self.paddle = Paddle(self.area)
         self.paddle_group = pygame.sprite.GroupSingle(self.paddle)
         self.keydown_handlers[pygame.K_LEFT].append(self.paddle.handle)
         self.keydown_handlers[pygame.K_RIGHT].append(self.paddle.handle)
@@ -36,12 +34,12 @@ class GameStage(Stage):
 
 
     def _create_bricks(self):
-        self.bricks_group = Level(self.screen_rect)
+        self.bricks_group = Level(self.area)
         self.bricks_group.load_first()
 
 
     def _create_ball(self):
-        self.ball = Ball(self.screen_rect)
+        self.ball = Ball(self.area)
         self.ball_group = pygame.sprite.GroupSingle(self.ball)
 
 
@@ -54,14 +52,11 @@ class GameStage(Stage):
 
 
     def _reset_paddle_position(self):
-        self.paddle.rect.centerx = self.screen_rect.centerx
-        self.paddle.rect.bottom = self.screen_rect.bottom - 1
+        self.paddle.reset()
 
 
     def _reset_ball_position(self):
-        self.ball.rect.centerx = self.paddle.rect.centerx
-        self.ball.rect.bottom = self.paddle.rect.top + 1
-        self.ball.direction = random.choice((-20, 20))
+        self.ball.reset(self.paddle.rect)
 
 
     def show(self, params=None):
@@ -85,15 +80,15 @@ class GameStage(Stage):
         pygame.mixer.music.fadeout(500)
 
 
-    def update(self):
+    def update(self, time):
         if self.game_over:
             return NextStage('outro', {
                 'win': not(self.ball.is_dead),
                 'score': self.score
             })
 
-        self.paddle.update()
-        self.ball.update()
+        self.paddle.update(time)
+        self.ball.update(time)
         if self.ball.is_dead:
             self.lives -= 1
             self.game_over = self.lives == 0
@@ -120,8 +115,13 @@ class GameStage(Stage):
 
         # Если блоков не осталось, то игра завершена.
         if len(self.bricks_group) == self.bricks_group.indestructible_brick_count:
-            self.game_over = True
+            try:
+                self.bricks_group.load_next()
+                self._reset_ball_position()
+            except:
+                self.game_over = True
 
+        self.bricks_group.update()
         self.panels_group.update()
 
 
@@ -129,7 +129,7 @@ class GameStage(Stage):
         surface.blit(self.background, (0, 0))
 
         saved_rect = surface.get_clip()
-        surface.set_clip(self.screen_rect)
+        surface.set_clip(self.area)
 
         self.bricks_group.draw(surface)
         self.paddle_group.draw(surface)
