@@ -7,7 +7,7 @@
 ```console
 > git clone https://github.com/nikitakarak/arkanoid.git
 > cd arkanoid
-> python3 main.py
+> python main.py
 ```
 
 ## Игровой процесс
